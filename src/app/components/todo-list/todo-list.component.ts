@@ -34,11 +34,11 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   constructor(private _dataService: DataService) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this._getList();
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }

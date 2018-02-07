@@ -4,7 +4,9 @@
   width: 260px;
   padding: 1em;
   border: 1px solid #af111c;
-  margin: 1em 0 0;
+}
+.both {
+  display: flex;
 }
 .todo-title {
   display: flex;
@@ -12,7 +14,7 @@
 }
 .todo-list {
   margin: 0;
-  padding: 0 0 2em 0;
+  padding: 0 0 4em 0;
   list-style-type: none;
 }
 .todo-list__item {

@@ -1,9 +1,0 @@
-.back__link {
-  cursor: pointer;
-  outline: none;
-  text-decoration: none;
-  color: #1e1b1d;
-}
-.back__link:hover {
-  text-decoration: underline;
-}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { INITIALDATA } from '../initial-data';
+import { INITIAL_DATA } from '../initial-data';
 import { of } from 'rxjs/observable/of';
 import { ITodoList } from '../interfaces/itodo-list';
 
@@ -8,11 +8,11 @@ import { ITodoList } from '../interfaces/itodo-list';
 export class DataService {
 
   public getInitialData(): Observable<ITodoList[]> {
-    return of(INITIALDATA);
+    return of(INITIAL_DATA);
   }
 
   public getSpecificData(id: number): Observable<ITodoList> {
-    return of(INITIALDATA.find((todo: ITodoList) => todo.id === id));
+    return of(INITIAL_DATA.find((todo: ITodoList) => todo.id === id));
   }
 
   constructor() {}

@@ -7,11 +7,24 @@ import { TodoDetailComponent } from './components/todo-detail/todo-detail.compon
 import { RouterModule, Routes } from '@angular/router';
 import { DataService } from './services/data.service';
 import { SharedService } from './services/sharedService.service';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/list', pathMatch: 'full'},
-  { path: 'list', component: TodoListComponent },
-  { path: 'detail/:id', component: TodoDetailComponent }
+  {
+    path: 'list',
+    component: TodoListComponent,
+    children: [
+      {
+        path: ':id',
+        component: TodoDetailComponent
+      }
+    ]
+  },
+  {
+    path: '',
+    redirectTo: '/list',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
@@ -22,6 +35,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [ DataService, SharedService ],

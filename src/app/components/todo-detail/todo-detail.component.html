@@ -1,11 +1,12 @@
 <div *ngIf='currentTodo' class='wrapper'>
   <h3 class='todo-title'>{{currentTodo.title}}</h3>
 
-  <input type='text' placeholder='Search...' (keyup)='searchTodo($event)'>
+  <input type='text' placeholder='Search...' (keyup)='searchTodo()' [(ngModel)]='search'>
 
   <ul *ngIf='todoToShow' class='todo-list'>
-    <li *ngFor='let el of todoToShow' class='todo-list__item'>
-      <span [ngClass]='{fulfilled: isFulfilled(el)}'>{{el}}</span> <span (click)='fulfilTodoEl(el)' ngClass='bloody clickable'>X</span>
+    <li *ngFor='let el of keys(todoToShow)' class='todo-list__item'>
+      <span [ngClass]='{fulfilled: isFulfilled(todoToShow[el].id, todoToShow[el].name)}'>{{todoToShow[el].name}}</span>
+      <span *ngIf='!isFulfilled(todoToShow[el].id, todoToShow[el].name)' (click)='fulfilTodoEl(todoToShow[el].id, todoToShow[el].name)' ngClass='bloody clickable'>X</span>
     </li>
   </ul>
 

@@ -1,0 +1,13 @@
+<div *ngIf='currentTodo' class='wrapper'>
+  <h3 class='todo-title'>{{currentTodo.title}}</h3>
+
+  <input type='text' placeholder='Search...' (keyup)='searchTodo($event)'>
+
+  <ul *ngIf='todoToShow' class='todo-list'>
+    <li *ngFor='let el of todoToShow' class='todo-list__item'>
+      <span [ngClass]='{fulfilled: isFulfilled(el)}'>{{el}}</span> <span (click)='fulfilTodoEl(el)' ngClass='bloody clickable'>X</span>
+    </li>
+  </ul>
+
+  <input type='text' placeholder='Add todo...' (keyup)='addTodo($event)'>
+</div>

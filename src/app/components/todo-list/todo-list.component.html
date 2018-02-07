@@ -1,0 +1,15 @@
+<div class='wrapper'>
+  <ul class='todo-list'>
+    <li *ngFor='let todo of list' class='todo-list__item'>
+      <a routerLink='/detail/{{todo.id}}' class='todo-list__link'>
+        <span>{{todo.title}}</span>
+      </a>
+      <div>
+        <span>({{todo.amount}}</span>/<span>{{todo.content.length}})</span>
+      </div>
+    </li>
+  </ul>
+
+  <input type='text' placeholder='New list...' #newTodoList>
+  <button (click)='addTodoList(newTodoList.value)' class='button'>Create</button>
+</div>

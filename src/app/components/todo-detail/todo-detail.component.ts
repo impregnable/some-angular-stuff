@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Subscription } from 'rxjs';
+
+import { SharedService } from '../../services/sharedService.service';
 import { ITodoList } from '../../interfaces/itodo-list';
 import { DataService } from '../../services/data.service';
-import { ActivatedRoute } from '@angular/router';
-import { SharedService } from '../../services/sharedService.service';
-import { Subscription } from 'rxjs';
 import { ITodoListItem } from '../../interfaces/itodo-list-item';
 
 @Component({
@@ -52,22 +53,22 @@ export class TodoDetailComponent implements OnInit, OnDestroy {
     if (!alreadyHere) {
       this.fulfilledList.push({id: id, name: name});
       this.currentTodo.amount--;
-      this._sharedService.fulfilledList = this.fulfilledList;
+      this.sharedService.fulfilledList = this.fulfilledList;
     }
   }
 
   public isFulfilled(id: number, name: string): boolean {
     if (!this.fulfilledList) {
       this.fulfilledList = [];
-      if (this._sharedService.fulfilledList) {
-        this.fulfilledList = this._sharedService.fulfilledList;
+      if (this.sharedService.fulfilledList) {
+        this.fulfilledList = this.sharedService.fulfilledList;
       }
     }
     return this.fulfilledList.some((el: ITodoListItem) => el.id === id && el.name === name);
   }
 
-  public _getCurrentTodo(): void {
-    this.subscription = this._dataService.getSpecificData(this.todoId).subscribe((todo: ITodoList) => {
+  private getCurrentTodo(): void {
+    this.subscription = this.dataService.getSpecificData(this.todoId).subscribe((todo: ITodoList) => {
       this.currentTodo = todo;
       if (this.currentTodo) {
         this.todoToShow = this.currentTodo.content;
@@ -76,15 +77,16 @@ export class TodoDetailComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private _dataService: DataService,
-    private _route: ActivatedRoute,
-    private _sharedService: SharedService
-  ) {
-    this.todoId = +this._route.snapshot.paramMap.get('id');
-  }
+    private dataService: DataService,
+    private route: ActivatedRoute,
+    private sharedService: SharedService
+  ) {}
 
   public ngOnInit(): void {
-    this._getCurrentTodo();
+    this.route.paramMap.subscribe((param: ParamMap) => {
+      this.todoId = Number(param.get('id'));
+      this.getCurrentTodo();
+    });
   }
 
   public ngOnDestroy(): void {

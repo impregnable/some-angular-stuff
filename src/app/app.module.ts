@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TodoDetailComponent } from './components/todo-detail/todo-detail.component';
-import { RouterModule, Routes } from '@angular/router';
 import { DataService } from './services/data.service';
 import { SharedService } from './services/sharedService.service';
-import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { INITIAL_DATA } from '../initial-data';
 import { of } from 'rxjs/observable/of';
+
+import { INITIAL_DATA } from '../initial-data';
 import { ITodoList } from '../interfaces/itodo-list';
 
 @Injectable()

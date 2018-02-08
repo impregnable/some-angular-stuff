@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+
 import { DataService } from '../../services/data.service';
 import { ITodoList } from '../../interfaces/itodo-list';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'todo-list',
@@ -26,16 +27,14 @@ export class TodoListComponent implements OnInit, OnDestroy {
     }
   }
 
-  private _getList(): void {
-    this.subscription = this._dataService.getInitialData().subscribe((data: ITodoList[]) => {
-      this.list = data;
-    })
+  private getList(): void {
+    this.subscription = this.dataService.getInitialData().subscribe((data: ITodoList[]) => this.list = data);
   }
 
-  constructor(private _dataService: DataService) {}
+  constructor(private dataService: DataService) {}
 
   public ngOnInit(): void {
-    this._getList();
+    this.getList();
   }
 
   public ngOnDestroy(): void {
